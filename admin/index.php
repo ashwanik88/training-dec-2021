@@ -1,22 +1,25 @@
 <?php 
+session_start();	// complusary
 require_once('config.php');
 require_once('includes/conn.php');
+
+// $_SESSION['user'] = 123;
+// echo '<pre>';
+// print_R($_SESSION);
+// die;
 
 if($_POST){
 	if(isset($_POST['username']) && !empty($_POST['username']) && isset($_POST['password']) && !empty($_POST['password'])){
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 		
-		$sql = "SELECT * FROM users WHERE username='". $username ."' AND password = '". md5($password) ."'";
+		$sql = "SELECT * FROM users WHERE username='". mysqli_real_escape_string($conn, $username) ."' AND password = '". md5($password) ."'";
+
 		$rs = mysqli_query($conn, $sql);
 		if(mysqli_num_rows($rs)){
 			$rec = mysqli_fetch_assoc($rs);
-			/* echo '<pre>';
-			print_r($rec);
-			die;
-			*/
 			
-			// save into session
+			$_SESSION['admin_user'] = $rec;
 			
 			header('Location: dashboard.php');
 			die;
