@@ -1,36 +1,14 @@
 <?php 
-session_start();	// complusary
-require_once('config.php');
-require_once('includes/conn.php');
+// session_start();	// complusary
+// require_once('config.php');
+
+require_once('includes/startup.php');
+require_once('libraries/index_lib.php');
 
 // $_SESSION['user'] = 123;
 // echo '<pre>';
 // print_R($_SESSION);
 // die;
-
-if($_POST){
-	if(isset($_POST['username']) && !empty($_POST['username']) && isset($_POST['password']) && !empty($_POST['password'])){
-		$username = $_POST['username'];
-		$password = $_POST['password'];
-		
-		$sql = "SELECT * FROM users WHERE username='". mysqli_real_escape_string($conn, $username) ."' AND password = '". md5($password) ."'";
-
-		$rs = mysqli_query($conn, $sql);
-		if(mysqli_num_rows($rs)){
-			$rec = mysqli_fetch_assoc($rs);
-			
-			$_SESSION['admin_user'] = $rec;
-			
-			header('Location: dashboard.php');
-			die;
-		}else{
-			echo 'Error: username/password is incorrect!';
-			die;
-		}
-		
-	}
-}
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -56,6 +34,8 @@ if($_POST){
   <form method="POST" action="">
     <img class="mb-4" src="assets/images/bootstrap-logo.svg" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+	
+	<?php displayAlert(); ?>
 
     <div class="form-floating">
       <input type="text" class="form-control" id="username" name="username" placeholder="Username">
@@ -75,5 +55,8 @@ if($_POST){
     <p class="mt-5 mb-3 text-muted">&copy; 2017–<?php echo date('Y'); ?></p>
   </form>
 </main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
   </body>
 </html>

@@ -1,10 +1,12 @@
 <?php
-session_start();
+require_once('includes/startup.php');
+require_once('libraries/dashboard_lib.php');
 
-if(!isset($_SESSION['admin_user']) || empty($_SESSION['admin_user'])){
-	header('Location: index.php');
-	die;
-}
+// require_once('includes/functions.php');
+// require('includes/functions.php');
+// include_once('includes/functions.php');
+// include('includes/functions.php');
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -33,7 +35,7 @@ if(!isset($_SESSION['admin_user']) || empty($_SESSION['admin_user'])){
   <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
-      <a class="nav-link px-3" href="#">Sign out</a>
+      <a class="nav-link px-3" href="logout.php">Sign out</a>
     </div>
   </div>
 </header>
@@ -130,6 +132,8 @@ if(!isset($_SESSION['admin_user']) || empty($_SESSION['admin_user'])){
           </button>
         </div>
       </div>
+	  
+	  <?php displayAlert(); ?>
 
       <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
