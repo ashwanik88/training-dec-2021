@@ -11,13 +11,8 @@ require_once('libraries/manage_users_lib.php');
         <h1 class="h2">Manage Users</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+            <a href="form_user.php" class="btn btn-sm btn-outline-secondary">Add New User</a>
           </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar"></span>
-            This week
-          </button>
         </div>
       </div>
 	  
@@ -28,125 +23,32 @@ require_once('libraries/manage_users_lib.php');
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Header</th>
-              <th scope="col">Header</th>
-              <th scope="col">Header</th>
-              <th scope="col">Header</th>
+              <th scope="col">User ID</th>
+              <th scope="col">Username</th>
+              <th scope="col">Fullname</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Status</th>
+              <th scope="col">Date Added</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1,001</td>
-              <td>random</td>
-              <td>data</td>
-              <td>placeholder</td>
-              <td>text</td>
-            </tr>
-            <tr>
-              <td>1,002</td>
-              <td>placeholder</td>
-              <td>irrelevant</td>
-              <td>visual</td>
-              <td>layout</td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>data</td>
-              <td>rich</td>
-              <td>dashboard</td>
-              <td>tabular</td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>information</td>
-              <td>placeholder</td>
-              <td>illustrative</td>
-              <td>data</td>
-            </tr>
-            <tr>
-              <td>1,004</td>
-              <td>text</td>
-              <td>random</td>
-              <td>layout</td>
-              <td>dashboard</td>
-            </tr>
-            <tr>
-              <td>1,005</td>
-              <td>dashboard</td>
-              <td>irrelevant</td>
-              <td>text</td>
-              <td>placeholder</td>
-            </tr>
-            <tr>
-              <td>1,006</td>
-              <td>dashboard</td>
-              <td>illustrative</td>
-              <td>rich</td>
-              <td>data</td>
-            </tr>
-            <tr>
-              <td>1,007</td>
-              <td>placeholder</td>
-              <td>tabular</td>
-              <td>information</td>
-              <td>irrelevant</td>
-            </tr>
-            <tr>
-              <td>1,008</td>
-              <td>random</td>
-              <td>data</td>
-              <td>placeholder</td>
-              <td>text</td>
-            </tr>
-            <tr>
-              <td>1,009</td>
-              <td>placeholder</td>
-              <td>irrelevant</td>
-              <td>visual</td>
-              <td>layout</td>
-            </tr>
-            <tr>
-              <td>1,010</td>
-              <td>data</td>
-              <td>rich</td>
-              <td>dashboard</td>
-              <td>tabular</td>
-            </tr>
-            <tr>
-              <td>1,011</td>
-              <td>information</td>
-              <td>placeholder</td>
-              <td>illustrative</td>
-              <td>data</td>
-            </tr>
-            <tr>
-              <td>1,012</td>
-              <td>text</td>
-              <td>placeholder</td>
-              <td>layout</td>
-              <td>dashboard</td>
-            </tr>
-            <tr>
-              <td>1,013</td>
-              <td>dashboard</td>
-              <td>irrelevant</td>
-              <td>text</td>
-              <td>visual</td>
-            </tr>
-            <tr>
-              <td>1,014</td>
-              <td>dashboard</td>
-              <td>illustrative</td>
-              <td>rich</td>
-              <td>data</td>
-            </tr>
-            <tr>
-              <td>1,015</td>
-              <td>random</td>
-              <td>tabular</td>
-              <td>information</td>
-              <td>text</td>
-            </tr>
+          <?php if(sizeof($data_users)){ ?>
+            <?php foreach($data_users as $data_user){ ?>
+              <tr>
+                <td><input type="checkbox" /> </td>
+                <td><?php echo $data_user['user_id']; ?></td>
+                <td><?php echo $data_user['username']; ?></td>
+                <td><?php echo $data_user['fullname']; ?></td>
+                <td><?php echo $data_user['email']; ?></td>
+                <td><?php echo $data_user['phone_number']; ?></td>
+                <td><?php echo $data_user['status']; ?></td>
+                <td><?php echo $data_user['date_added']; ?></td>
+                <td>Edit | Delete</td>
+              </tr>
+            <?php } ?>
+          <?php } ?>
           </tbody>
         </table>
       </div>
