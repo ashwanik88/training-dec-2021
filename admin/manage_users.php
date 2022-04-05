@@ -45,7 +45,7 @@ require_once('libraries/manage_users_lib.php');
                 <td><?php echo $data_user['phone_number']; ?></td>
                 <td><?php echo $data_user['status']; ?></td>
                 <td><?php echo $data_user['date_added']; ?></td>
-                <td>Edit | Delete</td>
+                <td><a href="form_user.php?user_id=<?php echo $data_user['user_id']; ?>"> Edit </a> | Delete</td>
               </tr>
             <?php } ?>
           <?php } ?>

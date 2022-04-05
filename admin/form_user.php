@@ -23,7 +23,7 @@ require_once('libraries/form_user_lib.php');
   <div class="mb-3 row">
     <label for="username" class="col-sm-2 col-form-label">Username</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control required" id="username" name="username" value="">
+      <input type="text" class="form-control required" id="username" name="username" value="<?php echo $username; ?>">
     </div>
   </div>
 
@@ -44,21 +44,21 @@ require_once('libraries/form_user_lib.php');
   <div class="mb-3 row">
     <label for="fullname" class="col-sm-2 col-form-label">Fullname</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control required" id="fullname" name="fullname" value="">
+      <input type="text" class="form-control required" id="fullname" name="fullname" value="<?php echo $fullname; ?>">
     </div>
   </div>
 
   <div class="mb-3 row">
     <label for="email" class="col-sm-2 col-form-label">Email</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control required email" id="email" name="email" value="">
+      <input type="text" class="form-control required email" id="email" name="email" value="<?php echo $email; ?>">
     </div>
   </div>
 
   <div class="mb-3 row">
     <label for="phone" class="col-sm-2 col-form-label">Phone</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control required" id="phone" name="phone" value="">
+      <input type="text" class="form-control required" id="phone_number" name="phone_number" value="<?php echo $phone_number; ?>">
     </div>
   </div>
 
