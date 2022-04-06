@@ -93,7 +93,6 @@ require_once('libraries/form_user_lib.php');
     </main>
 
 <?php require_once('common/scripts.php');?>
-<script type="text/javascript" src="assets/jquery/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="assets/jquery/validation/jquery.validate.min.js"></script>
 <script type="text/javascript">
   $('#frm').validate();

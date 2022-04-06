@@ -6,12 +6,17 @@ require_once('libraries/manage_users_lib.php');
 <?php require_once('common/header.php'); ?>
 <?php require_once('common/sidebar.php'); ?>
 
+<form method="post" action="">
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Manage Users</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
             <a href="form_user.php" class="btn btn-sm btn-outline-secondary">Add New User</a>
+          </div>
+
+          <div class="btn-group me-2">
+            <input type="submit" value="Delete" name="btnDelete" class="btn btn-danger" onclick="return confirm('Are you sure want to delete?');" />
           </div>
         </div>
       </div>
@@ -22,7 +27,7 @@ require_once('libraries/manage_users_lib.php');
         <table class="table table-striped table-sm">
           <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col"><input type="checkbox" onclick="$('.chk').prop('checked', $(this).is(':checked'));" /></th>
               <th scope="col">User ID</th>
               <th scope="col">Username</th>
               <th scope="col">Fullname</th>
@@ -37,7 +42,7 @@ require_once('libraries/manage_users_lib.php');
           <?php if(sizeof($data_users)){ ?>
             <?php foreach($data_users as $data_user){ ?>
               <tr>
-                <td><input type="checkbox" /> </td>
+                <td><input type="checkbox" class="chk" name="user_ids[]" value="<?php echo $data_user['user_id']; ?>" /> </td>
                 <td><?php echo $data_user['user_id']; ?></td>
                 <td><?php echo $data_user['username']; ?></td>
                 <td><?php echo $data_user['fullname']; ?></td>
@@ -45,7 +50,7 @@ require_once('libraries/manage_users_lib.php');
                 <td><?php echo $data_user['phone_number']; ?></td>
                 <td><?php echo $data_user['status']; ?></td>
                 <td><?php echo $data_user['date_added']; ?></td>
-                <td><a href="form_user.php?user_id=<?php echo $data_user['user_id']; ?>"> Edit </a> | Delete</td>
+                <td><a href="form_user.php?user_id=<?php echo $data_user['user_id']; ?>"> Edit </a> | <a href="manage_users.php?action=delete&user_id=<?php echo $data_user['user_id']; ?>" onclick="return confirm('Are you sure want to delete this?');">Delete</a></td>
               </tr>
             <?php } ?>
           <?php } ?>
@@ -53,6 +58,6 @@ require_once('libraries/manage_users_lib.php');
         </table>
       </div>
     </main>
-
+</form>
 <?php require_once('common/scripts.php');?>
 <?php require_once('common/html_ends.php');?>
