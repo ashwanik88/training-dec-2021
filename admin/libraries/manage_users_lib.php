@@ -28,6 +28,9 @@ if($_GET){
                     deleteUser($user_id);
                     addAlert('success', 'User has been deleted successfully!');
 			        redirect('manage_users.php');
+                }else{
+                    addAlert('warning', 'User id not defined!');
+                    redirect('manage_users.php');
                 }
 
             break;
@@ -46,6 +49,11 @@ if(mysqli_num_rows($rs)){
 }
 
 function deleteUser($user_id){
+    if($_SESSION['admin_user']['user_id'] == $user_id){
+        addAlert('warning', 'Logged in user can\'t be deleted!');
+        redirect('manage_users.php');
+        return false;
+    }
     global $conn;
     $sql_del = "DELETE FROM users WHERE user_id='". (int)$user_id ."'";
     mysqli_query($conn, $sql_del);

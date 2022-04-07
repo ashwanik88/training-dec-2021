@@ -35,9 +35,13 @@ if($_POST){
     $fullname = $_POST['fullname'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $cpassword = $_POST['cpassword'];
     $phone_number = $_POST['phone_number'];
     $status = $_POST['status'];
+
+    if($password == $cpassword){
     
+    if(!alreadyExists($username, $user_id)){
     if(isset($user_id) && !empty($user_id)){
         $sql = "UPDATE users SET username='". $username ."', fullname='". $fullname ."', password='". md5($password) ."', email='". $email ."', phone_number='". $phone_number ."', status='". $status ."' WHERE user_id='". (int)$user_id ."'";
         addAlert('success', 'User has been updated successfully!');
@@ -50,5 +54,24 @@ if($_POST){
     
     redirect('manage_users.php');
 
+    }else{
+        addAlert('danger', 'Username already exists!');
+    }
 
+}else{
+    addAlert('danger', 'Confirm password not matched!');
+}
+}
+
+
+function alreadyExists($username, $user_id){
+    global $conn;
+    $sql = "SELECT * FROM users WHERE username='". $username ."' AND user_id!='". $user_id ."'";
+    $rs = mysqli_query($conn, $sql);
+
+    if(mysqli_num_rows($rs)){
+        return true;
+    }
+
+    return false;
 }
