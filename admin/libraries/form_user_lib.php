@@ -43,8 +43,14 @@ if($_POST){
     
     if(!alreadyExists($username, $user_id)){
     if(isset($user_id) && !empty($user_id)){
-        $sql = "UPDATE users SET username='". $username ."', fullname='". $fullname ."', password='". md5($password) ."', email='". $email ."', phone_number='". $phone_number ."', status='". $status ."' WHERE user_id='". (int)$user_id ."'";
+        $sql = "UPDATE users SET username='". $username ."', fullname='". $fullname ."', email='". $email ."', phone_number='". $phone_number ."', status='". $status ."' WHERE user_id='". (int)$user_id ."'";
         addAlert('success', 'User has been updated successfully!');
+
+        if(!empty($password)){
+            $sql_pass = "UPDATE users SET password='". md5($password) ."' WHERE user_id='". (int)$user_id ."'";
+            mysqli_query($conn, $sql_pass);
+        }
+
     }else{
        $sql = "INSERT INTO users SET username='". $username ."', fullname='". $fullname ."', password='". md5($password) ."', email='". $email ."', phone_number='". $phone_number ."', status='". $status ."', date_added=NOW()";
        addAlert('success', 'User has been created successfully!');

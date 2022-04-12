@@ -1,6 +1,13 @@
 <?php checkAdminLogin();
 
 $document_title = 'Manage Users';
+$page_size = 10;
+$page = 1;
+
+if(isset($_GET['page']) && !empty($_GET['page'])){
+    $page = $_GET['page'];
+}
+
 
 if($_POST){
     
@@ -38,7 +45,12 @@ if($_GET){
     }
 }
 
-$sql = "SELECT * FROM users";
+$sql_total = "SELECT COUNT(*) as total FROM users";
+$rs_total = mysqli_query($conn, $sql_total);
+$user_total = mysqli_fetch_assoc($rs_total)['total'];
+
+$cur_page = ( $page - 1 ) * $page_size;
+$sql = "SELECT * FROM users LIMIT ". $cur_page .", " . $page_size;
 $rs = mysqli_query($conn, $sql);
 
 $data_users = array();

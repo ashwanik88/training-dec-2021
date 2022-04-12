@@ -56,6 +56,18 @@ require_once('libraries/manage_users_lib.php');
           <?php } ?>
           </tbody>
         </table>
+
+        <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+
+    <?php for($i = 1; $i <= ceil($user_total/$page_size); $i++){ ?>
+    <li class="page-item <?php echo ($i == $page)?'active':'';?>"><a class="page-link" href="manage_users.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+    <?php } ?>
+
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
       </div>
     </main>
 </form>
