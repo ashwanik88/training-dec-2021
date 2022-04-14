@@ -34,6 +34,7 @@ if($_GET){
                     $user_id = $_GET['user_id'];
                     deleteUser($user_id);
                     addAlert('success', 'User has been deleted successfully!');
+
 			        redirect('manage_users.php');
                 }else{
                     addAlert('warning', 'User id not defined!');
