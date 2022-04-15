@@ -3,6 +3,16 @@
 $document_title = 'Manage Users';
 $page_size = 10;
 $page = 1;
+$sort_by = 'user_id';
+$sort_order = 'DESC';
+
+if(isset($_GET['sort_by']) && !empty($_GET['sort_by'])){
+    $sort_by = $_GET['sort_by'];
+}
+
+if(isset($_GET['sort_order']) && !empty($_GET['sort_order'])){
+    $sort_order = $_GET['sort_order'];
+}
 
 if(isset($_GET['page']) && !empty($_GET['page'])){
     $page = $_GET['page'];
@@ -51,7 +61,7 @@ $rs_total = mysqli_query($conn, $sql_total);
 $user_total = mysqli_fetch_assoc($rs_total)['total'];
 
 $cur_page = ( $page - 1 ) * $page_size;
-$sql = "SELECT * FROM users LIMIT ". $cur_page .", " . $page_size;
+$sql = "SELECT * FROM users ORDER BY ". $sort_by ." ". $sort_order ." LIMIT ". $cur_page .", " . $page_size;
 $rs = mysqli_query($conn, $sql);
 
 $data_users = array();
@@ -60,6 +70,8 @@ if(mysqli_num_rows($rs)){
         $data_users[] = $rec;
     }
 }
+
+$sort_order = ($sort_order == 'ASC')?'DESC':'ASC';// swapping
 
 function deleteUser($user_id){
     if($_SESSION['admin_user']['user_id'] == $user_id){
@@ -71,3 +83,5 @@ function deleteUser($user_id){
     $sql_del = "DELETE FROM users WHERE user_id='". (int)$user_id ."'";
     mysqli_query($conn, $sql_del);
 }
+
+

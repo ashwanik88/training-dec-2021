@@ -28,13 +28,55 @@ require_once('libraries/manage_users_lib.php');
           <thead>
             <tr>
               <th scope="col"><input type="checkbox" onclick="$('.chk').prop('checked', $(this).is(':checked'));" /></th>
-              <th scope="col">User ID</th>
-              <th scope="col">Username</th>
-              <th scope="col">Fullname</th>
-              <th scope="col">Email</th>
-              <th scope="col">Phone</th>
-              <th scope="col">Status</th>
-              <th scope="col">Date Added</th>
+              <th scope="col">
+                <a href="manage_users.php?sort_by=user_id&sort_order=<?php echo $sort_order; ?>">User ID 
+                <?php if($sort_by == 'user_id'){ ?>
+                <span data-feather="chevron-<?php echo ($sort_order == 'ASC')?'down':'up'; ?>"></span>
+                <?php } ?>
+              </a> 
+                </th>
+              <th scope="col">
+              <a href="manage_users.php?sort_by=username&sort_order=<?php echo $sort_order; ?>">Username 
+                <?php if($sort_by == 'username'){ ?>
+                <span data-feather="chevron-<?php echo ($sort_order == 'ASC')?'down':'up'; ?>"></span>
+                <?php } ?>
+              </a> 
+              </th>
+              <th scope="col">
+              <a href="manage_users.php?sort_by=fullname&sort_order=<?php echo $sort_order; ?>">Fullname 
+                <?php if($sort_by == 'fullname'){ ?>
+                <span data-feather="chevron-<?php echo ($sort_order == 'ASC')?'down':'up'; ?>"></span>
+                <?php } ?>
+              </a>
+              </th>
+              <th scope="col">
+              <a href="manage_users.php?sort_by=email&sort_order=<?php echo $sort_order; ?>">Email 
+                <?php if($sort_by == 'email'){ ?>
+                <span data-feather="chevron-<?php echo ($sort_order == 'ASC')?'down':'up'; ?>"></span>
+                <?php } ?>
+              </a>
+              </th>
+              <th scope="col">
+              <a href="manage_users.php?sort_by=phone_number&sort_order=<?php echo $sort_order; ?>">Phone 
+                <?php if($sort_by == 'phone_number'){ ?>
+                <span data-feather="chevron-<?php echo ($sort_order == 'ASC')?'down':'up'; ?>"></span>
+                <?php } ?>
+              </a>
+              </th>
+              <th scope="col">
+              <a href="manage_users.php?sort_by=status&sort_order=<?php echo $sort_order; ?>">Status 
+                <?php if($sort_by == 'status'){ ?>
+                <span data-feather="chevron-<?php echo ($sort_order == 'ASC')?'down':'up'; ?>"></span>
+                <?php } ?>
+              </a>
+              </th>
+              <th scope="col">
+              <a href="manage_users.php?sort_by=date_added&sort_order=<?php echo $sort_order; ?>">Date Added 
+                <?php if($sort_by == 'date_added'){ ?>
+                <span data-feather="chevron-<?php echo ($sort_order == 'ASC')?'down':'up'; ?>"></span>
+                <?php } ?>
+              </a>
+              </th>
               <th scope="col">Action</th>
             </tr>
           </thead>
