@@ -77,7 +77,35 @@ require_once('libraries/manage_users_lib.php');
                 <?php } ?>
               </a>
               </th>
-              <th scope="col">Action</th>
+              <th scope="col" style="width: 100px;">Action</th>
+            </tr>
+            <tr>
+              <td>
+              </td>
+              <td>
+                <input type="text" name="filter_user_id" value="<?php echo $filter_user_id;?>" class="form-control form-control-sm"/>
+              </td>
+              <td>
+                <input type="text" name="filter_username" value="" class="form-control form-control-sm"/>
+              </td>
+              <td>
+                <input type="text" name="filter_fullname" value="" class="form-control form-control-sm"/>
+              </td>
+              <td>
+                <input type="text" name="filter_email" value="" class="form-control form-control-sm"/>
+              </td>
+              <td>
+                <input type="text" name="filter_phone" value="" class="form-control form-control-sm"/>
+              </td>
+              <td>
+                <input type="text" name="filter_status" value="" class="form-control form-control-sm"/>
+              </td>
+              <td>
+                <input type="text" name="filter_date_added" value="" class="form-control form-control-sm"/>
+              </td>
+              <td>
+                <input type="button" value="Filter" class="btn btn-info btn-sm btnFilter" />
+              </td>
             </tr>
           </thead>
           <tbody>
@@ -90,7 +118,7 @@ require_once('libraries/manage_users_lib.php');
                 <td><?php echo $data_user['fullname']; ?></td>
                 <td><?php echo $data_user['email']; ?></td>
                 <td><?php echo $data_user['phone_number']; ?></td>
-                <td><?php echo $data_user['status']; ?></td>
+                <td><?php echo ($data_user['status'] == 1)?'Active':'Inactive'; ?></td>
                 <td><?php echo $data_user['date_added']; ?></td>
                 <td><a href="form_user.php?user_id=<?php echo $data_user['user_id']; ?>"> Edit </a> | <a href="manage_users.php?action=delete&user_id=<?php echo $data_user['user_id']; ?>" onclick="return confirm('Are you sure want to delete this?');">Delete</a></td>
               </tr>
@@ -101,15 +129,15 @@ require_once('libraries/manage_users_lib.php');
 
         <nav aria-label="Page navigation example">
   <ul class="pagination">
-    <li class="page-item <?php echo ($page <= 1)?'disabled':'';?>"><a class="page-link" href="manage_users.php?page=<?php echo  ($page-1); ?>">Previous</a></li>
+    <li class="page-item <?php echo ($page <= 1)?'disabled':'';?>"><a class="page-link" href="manage_users.php?page=<?php echo  ($page-1); ?><?php echo $filter_url; ?>">Previous</a></li>
 
     <?php 
     $total_pages = ceil($user_total/$page_size);
     for($i = 1; $i <= $total_pages; $i++){ ?>
-    <li class="page-item <?php echo ($i == $page)?'active':'';?>"><a class="page-link" href="manage_users.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+    <li class="page-item <?php echo ($i == $page)?'active':'';?>"><a class="page-link" href="manage_users.php?page=<?php echo $i; ?><?php echo $filter_url; ?>"><?php echo $i; ?></a></li>
     <?php } ?>
 
-    <li class="page-item <?php echo ($page >= $total_pages)?'disabled':'';?>"><a class="page-link" href="manage_users.php?page=<?php echo  ($page+1); ?>">Next</a></li>
+    <li class="page-item <?php echo ($page >= $total_pages)?'disabled':'';?>"><a class="page-link" href="manage_users.php?page=<?php echo  ($page+1); ?><?php echo $filter_url; ?>">Next</a></li>
 
     
   </ul>
@@ -118,4 +146,16 @@ require_once('libraries/manage_users_lib.php');
     </main>
 </form>
 <?php require_once('common/scripts.php');?>
+<script type="text/javascript">
+  $('.btnFilter').click(function(){
+    var url = 'manage_users.php?';
+    var filter_user_id = $('input[name="filter_user_id"]').val();
+    if(filter_user_id != ''){
+      url += '&filter_user_id=' + encodeURI(filter_user_id);
+    }
+    
+    window.location.href = url;
+
+  });
+</script>
 <?php require_once('common/html_ends.php');?>

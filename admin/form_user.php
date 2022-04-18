@@ -18,7 +18,7 @@ require_once('libraries/form_user_lib.php');
 	  
 	  <?php displayAlert(); ?>
 
-<form id="frm" action="" method="post">
+<form id="frm" action="" method="post" autocomplete="off">
   
   <div class="mb-3 row">
     <label for="username" class="col-sm-2 col-form-label">Username</label>
@@ -30,7 +30,7 @@ require_once('libraries/form_user_lib.php');
   <div class="mb-3 row">
     <label for="password" class="col-sm-2 col-form-label">Password</label>
     <div class="col-sm-10">
-      <input type="password" class="form-control" id="password" name="password" value="">
+      <input type="password" class="form-control" id="password" name="password" value="" autocomplete="off">
     </div>
   </div>
   

@@ -5,17 +5,26 @@ $page_size = 10;
 $page = 1;
 $sort_by = 'user_id';
 $sort_order = 'DESC';
+$filter_url = '';
+$filter = ' WHERE 1=1 '; // 1=1 means true
 
 if(isset($_GET['sort_by']) && !empty($_GET['sort_by'])){
     $sort_by = $_GET['sort_by'];
+    $filter_url .= '&sort_by=' . $sort_by;
 }
 
 if(isset($_GET['sort_order']) && !empty($_GET['sort_order'])){
     $sort_order = $_GET['sort_order'];
+    $filter_url .= '&sort_order=' . $sort_order;
 }
 
 if(isset($_GET['page']) && !empty($_GET['page'])){
     $page = $_GET['page'];
+}
+
+if(isset($_GET['filter_user_id']) && !empty($_GET['filter_user_id'])){
+    $filter_user_id = $_GET['filter_user_id'];
+    $filter .= " AND user_id = '". (int)$filter_user_id ."'";
 }
 
 
@@ -56,12 +65,12 @@ if($_GET){
     }
 }
 
-$sql_total = "SELECT COUNT(*) as total FROM users";
+$sql_total = "SELECT COUNT(*) as total FROM users" . $filter;
 $rs_total = mysqli_query($conn, $sql_total);
 $user_total = mysqli_fetch_assoc($rs_total)['total'];
 
 $cur_page = ( $page - 1 ) * $page_size;
-$sql = "SELECT * FROM users ORDER BY ". $sort_by ." ". $sort_order ." LIMIT ". $cur_page .", " . $page_size;
+$sql = "SELECT * FROM users ". $filter ." ORDER BY ". $sort_by ." ". $sort_order ." LIMIT ". $cur_page .", " . $page_size;
 $rs = mysqli_query($conn, $sql);
 
 $data_users = array();
