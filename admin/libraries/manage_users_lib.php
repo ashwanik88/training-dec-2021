@@ -7,6 +7,14 @@ $sort_by = 'user_id';
 $sort_order = 'DESC';
 $filter_url = '';
 $filter = ' WHERE 1=1 '; // 1=1 means true
+$filter_user_id = '';
+$filter_username = '';
+$filter_fullname = '';
+$filter_email = '';
+$filter_phone = '';
+$filter_status = '';
+$filter_date_added = '';
+$filter_user_id = '';
 
 if(isset($_GET['sort_by']) && !empty($_GET['sort_by'])){
     $sort_by = $_GET['sort_by'];
@@ -26,6 +34,31 @@ if(isset($_GET['filter_user_id']) && !empty($_GET['filter_user_id'])){
     $filter_user_id = $_GET['filter_user_id'];
     $filter .= " AND user_id = '". (int)$filter_user_id ."'";
 }
+if(isset($_GET['filter_username']) && !empty($_GET['filter_username'])){
+    $filter_username = $_GET['filter_username'];
+    $filter .= " AND username LIKE '%". $filter_username ."%'";
+}
+if(isset($_GET['filter_fullname']) && !empty($_GET['filter_fullname'])){
+    $filter_fullname = $_GET['filter_fullname'];
+    $filter .= " AND fullname LIKE '%". $filter_fullname ."%'";
+}
+if(isset($_GET['filter_email']) && !empty($_GET['filter_email'])){
+    $filter_email = $_GET['filter_email'];
+    $filter .= " AND email LIKE '%". $filter_email ."%'";
+}
+if(isset($_GET['filter_phone']) && !empty($_GET['filter_phone'])){
+    $filter_phone = $_GET['filter_phone'];
+    $filter .= " AND phone_number LIKE '%". $filter_phone ."%'";
+}
+if(isset($_GET['filter_status'])){
+    $filter_status = $_GET['filter_status'];
+    $filter .= " AND status = '". $filter_status ."'";
+}
+if(isset($_GET['filter_date_added']) && !empty($_GET['filter_date_added'])){
+    $filter_date_added = $_GET['filter_date_added'];
+    $filter .= " AND date_added = '". $filter_date_added ."'";
+}
+
 
 
 if($_POST){

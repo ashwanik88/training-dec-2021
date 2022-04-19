@@ -86,22 +86,22 @@ require_once('libraries/manage_users_lib.php');
                 <input type="text" name="filter_user_id" value="<?php echo $filter_user_id;?>" class="form-control form-control-sm"/>
               </td>
               <td>
-                <input type="text" name="filter_username" value="" class="form-control form-control-sm"/>
+                <input type="text" name="filter_username" value="<?php echo $filter_username; ?>" class="form-control form-control-sm"/>
               </td>
               <td>
-                <input type="text" name="filter_fullname" value="" class="form-control form-control-sm"/>
+                <input type="text" name="filter_fullname" value="<?php echo $filter_fullname; ?>" class="form-control form-control-sm"/>
               </td>
               <td>
-                <input type="text" name="filter_email" value="" class="form-control form-control-sm"/>
+                <input type="text" name="filter_email" value="<?php echo $filter_email; ?>" class="form-control form-control-sm"/>
               </td>
               <td>
-                <input type="text" name="filter_phone" value="" class="form-control form-control-sm"/>
+                <input type="text" name="filter_phone" value="<?php echo $filter_phone; ?>" class="form-control form-control-sm"/>
               </td>
               <td>
-                <input type="text" name="filter_status" value="" class="form-control form-control-sm"/>
+                <input type="text" name="filter_status" value="<?php echo $filter_status; ?>" class="form-control form-control-sm"/>
               </td>
               <td>
-                <input type="text" name="filter_date_added" value="" class="form-control form-control-sm"/>
+                <input type="date" name="filter_date_added" value="<?php echo $filter_date_added; ?>" class="form-control form-control-sm"/>
               </td>
               <td>
                 <input type="button" value="Filter" class="btn btn-info btn-sm btnFilter" />
@@ -152,6 +152,30 @@ require_once('libraries/manage_users_lib.php');
     var filter_user_id = $('input[name="filter_user_id"]').val();
     if(filter_user_id != ''){
       url += '&filter_user_id=' + encodeURI(filter_user_id);
+    }
+    var filter_username = $('input[name="filter_username"]').val();
+    if(filter_username != ''){
+      url += '&filter_username=' + encodeURI(filter_username);
+    }
+    var filter_fullname = $('input[name="filter_fullname"]').val();
+    if(filter_fullname != ''){
+      url += '&filter_fullname=' + encodeURI(filter_fullname);
+    }
+    var filter_email = $('input[name="filter_email"]').val();
+    if(filter_email != ''){
+      url += '&filter_email=' + encodeURI(filter_email);
+    }
+    var filter_phone = $('input[name="filter_phone"]').val();
+    if(filter_phone != ''){
+      url += '&filter_phone=' + encodeURI(filter_phone);
+    }
+    var filter_status = $('input[name="filter_status"]').val();
+    if(filter_status != ''){
+      url += '&filter_status=' + encodeURI(filter_status);
+    }
+    var filter_date_added = $('input[name="filter_date_added"]').val();
+    if(filter_date_added != ''){
+      url += '&filter_date_added=' + encodeURI(filter_date_added);
     }
     
     window.location.href = url;
