@@ -101,7 +101,21 @@ require_once('libraries/manage_users_lib.php');
                 <input type="text" name="filter_status" value="<?php echo $filter_status; ?>" class="form-control form-control-sm"/>
               </td>
               <td>
-                <input type="date" name="filter_date_added" value="<?php echo $filter_date_added; ?>" class="form-control form-control-sm"/>
+              <div class="row g-1">
+              <div class="col-sm-6">
+              <div class="input-group input-group-sm flex-nowrap">
+                <span class="input-group-text" id="addon-wrapping">From</span>
+                <input type="date" class="form-control" placeholder="Username" name="filter_date_added" value="<?php echo $filter_date_added; ?>">
+              </div>
+              </div>
+              <div class="col-sm-6">
+              <div class="input-group input-group-sm flex-nowrap">
+                <span class="input-group-text" id="addon-wrapping">To</span>
+                <input type="date" class="form-control" placeholder="Username" name="filter_date_added" value="<?php echo $filter_date_added; ?>">
+                </div>
+              </div>
+              </div>
+
               </td>
               <td>
                 <input type="button" value="Filter" class="btn btn-info btn-sm btnFilter" />
@@ -127,21 +141,25 @@ require_once('libraries/manage_users_lib.php');
           </tbody>
         </table>
 
-        <nav aria-label="Page navigation example">
+<?php
+$total_pages = ceil($user_total/$page_size);
+//if($user_total > $page_size){
+if($total_pages > 1){
+?>
+<nav aria-label="Page navigation example">
   <ul class="pagination">
     <li class="page-item <?php echo ($page <= 1)?'disabled':'';?>"><a class="page-link" href="manage_users.php?page=<?php echo  ($page-1); ?><?php echo $filter_url; ?>">Previous</a></li>
-
     <?php 
-    $total_pages = ceil($user_total/$page_size);
+   
     for($i = 1; $i <= $total_pages; $i++){ ?>
     <li class="page-item <?php echo ($i == $page)?'active':'';?>"><a class="page-link" href="manage_users.php?page=<?php echo $i; ?><?php echo $filter_url; ?>"><?php echo $i; ?></a></li>
     <?php } ?>
 
     <li class="page-item <?php echo ($page >= $total_pages)?'disabled':'';?>"><a class="page-link" href="manage_users.php?page=<?php echo  ($page+1); ?><?php echo $filter_url; ?>">Next</a></li>
-
-    
   </ul>
 </nav>
+<?php } ?>
+
       </div>
     </main>
 </form>
