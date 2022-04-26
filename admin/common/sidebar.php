@@ -10,6 +10,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="manage_categories.php">
+              <span data-feather="file"></span>
+              Manage Categories
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="manage_users.php">
               <span data-feather="file"></span>
               Manage Users
