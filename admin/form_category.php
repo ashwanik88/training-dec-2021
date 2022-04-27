@@ -24,26 +24,7 @@ require_once('libraries/form_category_lib.php');
     <div class="col-sm-10">
       <select class="form-control required" id="parent_id" name="parent_id">
         <option value=""></option>
-        <?php if(sizeof($data_categories)){ ?>
-          <?php foreach($data_categories as $data_category){ ?>
-            <option value="<?php echo $data_category['category_id']; ?>"><?php echo $data_category['category_name']; ?></option>
-
-            <?php $data_child = getCategories($data_category['category_id']); ?>
-
-            <?php if(sizeof($data_child)){ 
-              foreach($data_child as $child){ ?>
-                <option value="<?php echo $child['category_id']; ?>"><?php echo '|___' . $child['category_name']; ?></option>
-
-              <?php $data_child2 = getCategories($child['category_id']); ?>
-              <?php if(sizeof($data_child2)){ 
-              foreach($data_child2 as $child2){ ?>
-                <option value="<?php echo $child2['category_id']; ?>"><?php echo '|______' . $child2['category_name']; ?></option>
-              <?php } } ?>
-
-              <?php } } ?>
-
-          <?php } ?>
-        <?php } ?>
+        <?php echo displayCategories(0); ?>
       </select>
     </div>
   </div>

@@ -7,7 +7,7 @@ $category_name = '';
 $parent_id = '';
 $status = '';
 
-$data_categories = getCategories();
+$data_categories = getCategories(0);
 
 if(isset($_GET['category_id']) && !empty($_GET['category_id'])){
     $category_id = $_GET['category_id'];
@@ -65,4 +65,21 @@ function getCategories($parent_id = 0){
         }
     }
     return $data;
+}
+
+function displayCategories($category_id, $sep = ''){
+    $categories = getCategories($category_id);
+    $html = '';
+    if(sizeof($categories)){
+        foreach($categories as $category){
+            if($category['parent_id'] == 0){
+                $sep = '';
+            }
+            $html .= '<option value="'. $category['category_id'].'">'. $sep . $category['category_name'] .'</option>';
+            // $sep = $sep . '----';
+            $sep .= '----';
+            $html .= displayCategories($category['category_id'], $sep); // recursion
+        } 
+    }
+    return $html;
 }
