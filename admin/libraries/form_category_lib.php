@@ -19,11 +19,9 @@ if(isset($_GET['category_id']) && !empty($_GET['category_id'])){
     $data_category = array();
     if(mysqli_num_rows($rs)){
         $data_category = mysqli_fetch_assoc($rs);
-        
         $category_name = $data_category['category_name'];
         $parent_id = $data_category['parent_id'];
         $status = $data_category['status'];
-        
 
     }
 }
@@ -67,7 +65,7 @@ function getCategories($parent_id = 0){
     return $data;
 }
 
-function displayCategories($category_id, $sep = ''){
+function displayCategories($category_id, $parent_id = 0, $sep = ''){
     $categories = getCategories($category_id);
     $html = '';
     if(sizeof($categories)){
@@ -75,10 +73,16 @@ function displayCategories($category_id, $sep = ''){
             if($category['parent_id'] == 0){
                 $sep = '';
             }
-            $html .= '<option value="'. $category['category_id'].'">'. $sep . $category['category_name'] .'</option>';
+            $html .= '<option value="'. $category['category_id'].'" ';
+
+            if($category['category_id'] == $parent_id){
+                $html .= ' selected="selected" ';
+            }
+
+            $html .= ' >'. $sep . $category['category_name'] .'</option>';
             // $sep = $sep . '----';
             $sep .= '----';
-            $html .= displayCategories($category['category_id'], $sep); // recursion
+            $html .= displayCategories($category['category_id'], $parent_id , $sep); // recursion
         } 
     }
     return $html;

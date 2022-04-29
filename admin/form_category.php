@@ -24,7 +24,7 @@ require_once('libraries/form_category_lib.php');
     <div class="col-sm-10">
       <select class="form-control required" id="parent_id" name="parent_id">
         <option value=""></option>
-        <?php echo displayCategories(0); ?>
+        <?php echo displayCategories(0, $parent_id); ?>
       </select>
     </div>
   </div>
@@ -72,5 +72,6 @@ require_once('libraries/form_category_lib.php');
 <script type="text/javascript" src="assets/jquery/validation/jquery.validate.min.js"></script>
 <script type="text/javascript">
   $('#frm').validate();
+  // $('#parent_id').val(<?php echo $parent_id; ?>); // short method
 </script>
 <?php require_once('common/html_ends.php');?>

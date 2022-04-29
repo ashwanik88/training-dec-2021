@@ -12,7 +12,7 @@ require_once('libraries/manage_categories_lib.php');
         <h1 class="h2">Manage Categories</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
-            <a href="form_category.php" class="btn btn-sm btn-outline-secondary">Add New Category</a>
+            <a href="form_category.php" class="btn btn-primary">Add New Category</a>
           </div>
 
           <div class="btn-group me-2">
