@@ -14,6 +14,9 @@ $filter_status = '';
 $filter_date_added = '';
 $filter_category_id = '';
 
+
+$filter .= " AND parent_id = '0'";
+
 if(isset($_GET['sort_by']) && !empty($_GET['sort_by'])){
     $sort_by = $_GET['sort_by'];
     $filter_url .= '&sort_by=' . $sort_by;
@@ -121,4 +124,44 @@ function deleteCategory($category_id){
     mysqli_query($conn, $sql_del);
 }
 
+function getCategories($parent_id = 0){
+    global $conn;
+    $sql = "SELECT * FROM categories WHERE parent_id='". (int)$parent_id ."'";
+    $rs = mysqli_query($conn, $sql);
+    $data = array();
+    if(mysqli_num_rows($rs)){
+        while($rec = mysqli_fetch_assoc($rs)){
+            $data[] = $rec;
+        }
+    }
+    return $data;
+}
 
+function displayCategories($category_id, $parent_id = 0, $sep = ''){
+    $categories = getCategories($category_id);
+    $html = '';
+    if(sizeof($categories)){
+        foreach($categories as $category){
+            if($category['parent_id'] == 0){
+                $sep = '';
+            }
+            
+
+            $html .= '<tr>
+            <td><input type="checkbox" class="chk" name="category_ids[]" value="'.$category['category_id'].'" /> </td>
+            <td>'.$category['category_id'].'</td>
+            <td>'.$category['category_name'] . $sep .'</td>
+            <td>'.$category['parent_id'].'</td>
+            <td>'.(($category['status'] == 1)?'Active':'Inactive').'</td>
+            <td>'.$category['date_added'].'</td>
+            <td><a href="form_category.php?category_id='.$category['category_id'].'"> Edit </a> | <a href="manage_categories.php?action=delete&category_id='.$category['category_id'].'" onclick="return confirm(\'Are you sure want to delete this?\');">Delete</a></td>
+          </tr>';
+
+
+            // $sep = $sep . '----';
+            $sep .= ' >> ';
+            $html .= displayCategories($category['category_id'], $parent_id , $sep); // recursion
+        } 
+    }
+    return $html;
+}

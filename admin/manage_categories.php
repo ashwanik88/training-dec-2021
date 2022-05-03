@@ -114,6 +114,9 @@ require_once('libraries/manage_categories_lib.php');
                 <td><?php echo $data_category['date_added']; ?></td>
                 <td><a href="form_category.php?category_id=<?php echo $data_category['category_id']; ?>"> Edit </a> | <a href="manage_categories.php?action=delete&category_id=<?php echo $data_category['category_id']; ?>" onclick="return confirm('Are you sure want to delete this?');">Delete</a></td>
               </tr>
+
+             <?php echo displayCategories( $data_category['category_id'],  $data_category['parent_id']); ?>
+
             <?php } ?>
           <?php } ?>
           </tbody>
