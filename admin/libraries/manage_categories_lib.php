@@ -137,6 +137,21 @@ function getCategories($parent_id = 0){
     return $data;
 }
 
+function getParents($category_id){
+    global $conn;
+    $parent_name = '';
+    $sql = "SELECT * FROM categories WHERE category_id='". (int)$category_id ."'";
+    $rs = mysqli_query($conn, $sql);
+    $data = array();
+    if(mysqli_num_rows($rs)){
+        $data = mysqli_fetch_assoc($rs);
+        $parent_name .= getParents($data['parent_id']);
+        $parent_name .= $data['category_name'] . ' > ';
+    }
+    
+    return $parent_name;
+}
+
 function displayCategories($category_id, $parent_id = 0, $sep = ''){
     $categories = getCategories($category_id);
     $html = '';
@@ -146,11 +161,12 @@ function displayCategories($category_id, $parent_id = 0, $sep = ''){
                 $sep = '';
             }
             
+            
 
             $html .= '<tr>
             <td><input type="checkbox" class="chk" name="category_ids[]" value="'.$category['category_id'].'" /> </td>
             <td>'.$category['category_id'].'</td>
-            <td>'.$category['category_name'] . $sep .'</td>
+            <td>'. getParents($category['parent_id']) . $category['category_name'] . '</td>
             <td>'.$category['parent_id'].'</td>
             <td>'.(($category['status'] == 1)?'Active':'Inactive').'</td>
             <td>'.$category['date_added'].'</td>
