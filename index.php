@@ -1,22 +1,10 @@
-HTML
-<?php
-    ini_set('display_errors', true);
-    error_reporting(E_ALL);
-
-    $a = 4;
-    $b = 5;
-
-    $c = $a + $b;
-
-    echo $c;
-
-    $arr = array(
-        'key1' => 'hello',
-        'key2' => 'world',
-    );
-    echo '<pre>';
-    print_r($arr);
-    
-
-?>
-HTML
+<?php require_once('common/html_start.php'); ?>
+<?php require_once('common/header.php'); ?>
+<?php require_once('common/sidebar.php'); ?>
+<?php require_once('common/category.php'); ?>
+<?php require_once('common/feature.php'); ?>
+<?php require_once('common/banners.php'); ?>
+<?php require_once('common/latest.php'); ?>
+<?php require_once('common/blog.php'); ?>
+<?php require_once('common/footer.php'); ?>
+<?php require_once('common/html_end.php'); ?>
