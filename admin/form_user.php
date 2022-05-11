@@ -18,7 +18,7 @@ require_once('libraries/form_user_lib.php');
 	  
 	  <?php displayAlert(); ?>
 
-<form id="frm" action="" method="post" autocomplete="off">
+<form id="frm" action="" method="post" autocomplete="off" enctype="multipart/form-data">
   
   <div class="mb-3 row">
     <label for="username" class="col-sm-2 col-form-label">Username</label>
@@ -59,6 +59,18 @@ require_once('libraries/form_user_lib.php');
     <label for="phone" class="col-sm-2 col-form-label">Phone</label>
     <div class="col-sm-10">
       <input type="text" class="form-control required" id="phone_number" name="phone_number" value="<?php echo $phone_number; ?>">
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label for="photo" class="col-sm-2 col-form-label">Photo</label>
+    <div class="col-sm-10">
+
+    <a href="<?php echo showPhoto($photo); ?>" target="_blank">
+      <img src="<?php echo showPhoto($photo); ?>" class="img-thumbnail mb-2" width="100px" />
+    </a>
+
+      <input type="file" class="form-control" id="photo" name="photo" >
     </div>
   </div>
 

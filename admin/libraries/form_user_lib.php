@@ -7,6 +7,7 @@ $username = '';
 $fullname = '';
 $email = '';
 $phone_number = '';
+$photo = '';
 $status = '';
 
 if(isset($_GET['user_id']) && !empty($_GET['user_id'])){
@@ -24,6 +25,7 @@ if(isset($_GET['user_id']) && !empty($_GET['user_id'])){
         $fullname = $data_user['fullname'];
         $email = $data_user['email'];
         $phone_number = $data_user['phone_number'];
+        $photo = $data_user['photo'];
         $status = $data_user['status'];
         
 
@@ -39,11 +41,21 @@ if($_POST){
     $phone_number = $_POST['phone_number'];
     $status = $_POST['status'];
 
+    // copy();
+
+    // print_r($_FILES['photo']);
+    
+
     if($password == $cpassword){
     
     if(!alreadyExists($username, $user_id)){
+
+    if(isset($_FILES['photo']) && !empty($_FILES['photo'])){
+        $photo = uploadFile($_FILES['photo'], 'users/');
+    }
+    
     if(isset($user_id) && !empty($user_id)){
-        $sql = "UPDATE users SET username='". $username ."', fullname='". $fullname ."', email='". $email ."', phone_number='". $phone_number ."', status='". $status ."' WHERE user_id='". (int)$user_id ."'";
+        $sql = "UPDATE users SET username='". $username ."', fullname='". $fullname ."', email='". $email ."', phone_number='". $phone_number ."', photo='". $photo ."' status='". $status ."' WHERE user_id='". (int)$user_id ."'";
         addAlert('success', 'User has been updated successfully!');
 
         if(!empty($password)){
@@ -51,8 +63,11 @@ if($_POST){
             mysqli_query($conn, $sql_pass);
         }
 
+        
+        
+
     }else{
-       $sql = "INSERT INTO users SET username='". $username ."', fullname='". $fullname ."', password='". md5($password) ."', email='". $email ."', phone_number='". $phone_number ."', status='". $status ."', date_added=NOW()";
+       $sql = "INSERT INTO users SET username='". $username ."', fullname='". $fullname ."', password='". md5($password) ."', email='". $email ."', phone_number='". $phone_number ."', photo='". $photo ."',  status='". $status ."', date_added=NOW()";
        addAlert('success', 'User has been created successfully!');
     }
     $rs = mysqli_query($conn, $sql);
@@ -80,4 +95,24 @@ function alreadyExists($username, $user_id){
     }
 
     return false;
+}
+
+function uploadFile($file, $path){
+    $tmp_name = $file['tmp_name'];
+    $name = $file['name'];
+    $sub_dir = $path;
+    $new_filename = time() . '-' . $name;
+    $dir = DIR_UPLOADS . $sub_dir;
+    if(!is_dir($dir)){
+        mkdir($dir, '0777');
+    }
+
+    $dest = $dir .  $new_filename;
+    
+    $ok = move_uploaded_file($tmp_name, $dest);
+    
+    if($ok){
+        return $sub_dir .  $new_filename;
+    }
+    return '';
 }

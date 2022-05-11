@@ -129,7 +129,9 @@ require_once('libraries/manage_users_lib.php');
                 <td><input type="checkbox" class="chk" name="user_ids[]" value="<?php echo $data_user['user_id']; ?>" /> </td>
                 <td><?php echo $data_user['user_id']; ?></td>
                 <td><?php echo $data_user['username']; ?></td>
-                <td><?php echo $data_user['fullname']; ?></td>
+                <td>
+                <img src="<?php echo showPhoto($data_user['photo']); ?>"  width="100px" /> <br>
+                <?php echo $data_user['fullname']; ?></td>
                 <td><?php echo $data_user['email']; ?></td>
                 <td><?php echo $data_user['phone_number']; ?></td>
                 <td><?php echo ($data_user['status'] == 1)?'Active':'Inactive'; ?></td>

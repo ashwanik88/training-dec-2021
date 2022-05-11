@@ -28,3 +28,12 @@ function displayAlert(){
 	echo $html;
 	}
 }
+
+function showPhoto($filename){
+    $filepath = DIR_UPLOADS . $filename;
+    if(file_exists($filepath) && !empty($filename)){
+        return HTTP_UPLOADS . $filename;
+    }else{
+        return HTTP_UPLOADS . 'preivew.png';
+    }
+}
