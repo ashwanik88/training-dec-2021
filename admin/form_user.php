@@ -16,7 +16,7 @@ require_once('libraries/form_user_lib.php');
         </div>
       </div>
 	  
-	  <?php displayAlert(); ?>
+<?php displayAlert(); ?>
 
 <form id="frm" action="" method="post" autocomplete="off" enctype="multipart/form-data">
   
@@ -24,6 +24,7 @@ require_once('libraries/form_user_lib.php');
     <label for="username" class="col-sm-2 col-form-label">Username</label>
     <div class="col-sm-10">
       <input type="text" class="form-control required" id="username" name="username" value="<?php echo $username; ?>">
+      <div class="msg"></div>
     </div>
   </div>
 
@@ -108,5 +109,32 @@ require_once('libraries/form_user_lib.php');
 <script type="text/javascript" src="assets/jquery/validation/jquery.validate.min.js"></script>
 <script type="text/javascript">
   $('#frm').validate();
+
+  $('#username').blur(function(){
+    $.ajax({
+      url: 'ajax.php',
+      type: 'GET',
+      dataType: 'JSON',
+      data: {
+        'username' : $('#username').val(),
+      },
+      success: function(json){
+        $('.msg').html(json.msg);
+        $('.msg').addClass('text-success');
+        $('.msg').removeClass('text-danger');
+        if(!json.success){
+          $('#username').val('').focus();
+          $('.msg').addClass('text-danger');
+          $('.msg').removeClass('text-success');
+        }
+      },
+      beforeSend: function(){
+        // show loading image
+      },
+      complete: function(){
+        // hide loading image
+      }
+    });
+  });
 </script>
 <?php require_once('common/html_ends.php');?>
