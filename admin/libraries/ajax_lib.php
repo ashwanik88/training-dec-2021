@@ -2,9 +2,10 @@
 
 $arr = array('success' => false, 'msg' => 'Incomplete form data!');
 
-if(isset($_GET['username']) && !empty($_GET['username'])){
-    $username = $_GET['username'];
-    $resp = alreadyExists($username, 0);
+if(isset($_POST['username']) && !empty($_POST['username'])){
+    $username = $_POST['username'];
+    $user_id = $_POST['user_id'];
+    $resp = alreadyExists($username, $user_id);
     if($resp){
         $arr['success'] = false;
         $arr['msg'] = 'Username not available!';

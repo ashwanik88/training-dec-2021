@@ -111,22 +111,26 @@ require_once('libraries/form_user_lib.php');
   $('#frm').validate();
 
   $('#username').blur(function(){
+    if($(this).val() == ''){
+      return false;
+    }
     $.ajax({
       url: 'ajax.php',
-      type: 'GET',
-      dataType: 'JSON',
+      type: 'POST',  // GET | POST
+      dataType: 'JSON', // JSON | HTML
       data: {
         'username' : $('#username').val(),
+        'user_id' : <?php echo $user_id; ?>
       },
       success: function(json){
-        $('.msg').html(json.msg);
         $('.msg').addClass('text-success');
         $('.msg').removeClass('text-danger');
         if(!json.success){
-          $('#username').val('').focus();
+          $('#username').focus();
           $('.msg').addClass('text-danger');
           $('.msg').removeClass('text-success');
         }
+        $('.msg').html(json.msg);
       },
       beforeSend: function(){
         // show loading image

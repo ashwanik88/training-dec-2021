@@ -55,7 +55,8 @@ if($_POST){
     }
     
     if(isset($user_id) && !empty($user_id)){
-        $sql = "UPDATE users SET username='". $username ."', fullname='". $fullname ."', email='". $email ."', phone_number='". $phone_number ."', photo='". $photo ."' status='". $status ."' WHERE user_id='". (int)$user_id ."'";
+        $sql = "UPDATE users SET username='". $username ."', fullname='". $fullname ."', email='". $email ."', phone_number='". $phone_number ."', photo='". $photo ."', status='". $status ."' WHERE user_id='". (int)$user_id ."'";
+        
         addAlert('success', 'User has been updated successfully!');
 
         if(!empty($password)){
